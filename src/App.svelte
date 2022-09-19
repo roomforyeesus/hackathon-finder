@@ -1,8 +1,11 @@
 <script lang="ts">
-function addSubs() => {
-	  const data = {} 
-	  fetch('https://example.com/profile', {
-	    method: 'POST', // or 'PUT'
+function addSubs() {
+	  const data = {
+      name: "John Doe",
+      email: "test@email.com",
+    };
+	  fetch('https://localhost:8000/api/subscribers', {
+	    method: 'POST',
 	    headers: {
 	      'Content-Type': 'application/json',
 	    },
@@ -27,7 +30,7 @@ function addSubs() => {
     <div class="form">
       <input type="text" placeholder="Name" />
       <input type="text" placeholder="Email" />
-      <button>Subscribe</button>
+      <button on:click="{addSubs}">Subscribe</button>
     </div>
   </div>
   <footer>
