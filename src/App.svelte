@@ -1,5 +1,5 @@
 <script lang="ts">
-import { addSubs} from './scripts'
+import { addSubs } from './scripts'
 </script>
 
 <main>

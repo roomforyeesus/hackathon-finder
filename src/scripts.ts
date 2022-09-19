@@ -26,7 +26,7 @@ async function sendEmails() {
   const subscribers = await fetch('http://127.0.0.1:8000/api/subscribers/');
   const subscribersJson = await subscribers.json();
   const subscribersEmails = subscribersJson.map((subscriber:any) => {subscriber.email});
-
+  const hackathons = await getLatestHackthons();
   const courier_options = {
         method: 'POST',
         headers: {
@@ -40,8 +40,8 @@ async function sendEmails() {
               "email": subscribersEmails,
             },
             "content": {
-              "title": "Hiya! Check these Hackthons and Events!",
-              "body": "Check out these latest hackthons and events!" + getLatestHackthons(),
+              "title": "Hiya!"+ "Check these Hackthons and Events!",
+              "body": "Check out these latest hackthons and events!" + hackathons,
             },
             "routing": {
               "method": "all",
