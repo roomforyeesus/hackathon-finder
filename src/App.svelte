@@ -1,24 +1,5 @@
 <script lang="ts">
-function addSubs() {
-	  const data = {
-      name: "John Doe",
-      email: "test@email.com",
-    };
-	  fetch('https://localhost:8000/api/subscribers', {
-	    method: 'POST',
-	    headers: {
-	      'Content-Type': 'application/json',
-	    },
-	    body: JSON.stringify(data),
-	  })
-	    .then((response) => response.json())
-	    .then((data) => {
-	      console.log('Success:', data);
-	    })
-	    .catch((error) => {
-	      console.error('Error:', error);
-	    });
-}
+import { addSubs} from './scripts'
 </script>
 
 <main>

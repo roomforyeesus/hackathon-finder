@@ -59,13 +59,24 @@ async function sendEmails() {
 }
 
 function addSubs() {
-  const subscribers = {
+  const data = {
+    name: "John Doe",
+    email: "test@email.com",
+  };
+  fetch('https://localhost:8000/api/subscribers', {
     method: 'POST',
-    body: JSON.stringify({
-      "email": "",
-      "name": "",
-    }),
-  }
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log('Success:', data);
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
 }
 export {addSubs, sendEmails};
 
