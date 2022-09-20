@@ -9,4 +9,10 @@ def index(request):
     return JsonResponse(data, safe=False)
 
 def post_subscriber(request):
-    return HttpResponse('Hello World')
+    """post subscribers to db"""
+    print(request.POST)
+    email = request.POST.get('email')
+    name = request.POST.get('name')
+    Subscriber.objects.create(email=email)
+    Subscriber.objects.create(name=name)
+    return HttpResponse('ok')

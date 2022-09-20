@@ -1,5 +1,5 @@
 <script lang="ts">
-import { addSubs } from './scripts'
+import { addSubs } from './addSubs';
 </script>
 
 <main>
@@ -8,11 +8,11 @@ import { addSubs } from './scripts'
     <div class="image">
       <img id="cuteblub"src="https://i.postimg.cc/5tS9yvRQ/pngwing-com.png" alt="cuteblub" />
     </div>
-    <div class="form">
+    <form on:submit={addSubs} method="POST">
       <input type="text" placeholder="Name" />
       <input type="text" placeholder="Email" />
-      <button on:click="{addSubs}">Subscribe</button>
-    </div>
+      <input type="submit" value="Subscribe" />
+    </form>
   </div>
   <footer>
     <p>© 2022 Hackathon Finder</p>
