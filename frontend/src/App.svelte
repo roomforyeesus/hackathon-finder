@@ -1,28 +1,29 @@
 <script lang="ts">
-let name: string;
-let email: string;
-import axios from 'axios';
+let name;
+let email;
+
+
+
 
 const submit = async () => {
-  try{
-  const response = await axios.post('http://127.0.0.1:8000/api/subscribers/', {
+  const response = await fetch("http://localhost:8000/api/subscribers/", {
+    method: "POST",
+    mode: "no-cors",
+    credentials: 'include',
     headers: {
-      'Content-Type' : 'application/json',
-      'Authorization': 'Token 7f127f946c99945b5859c97cf7782172d7aec25f',
-      'Allow-Control-Allow-Origin': '*',
-      'Allow-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-      'Allow-Control-Allow-Headers': 'Content-Type, Authorization, X-Requested-With'
+      "Content-Type": "application/json",
+      "Authorization": "Token " + "7f127f946c99945b5859c97cf7782172d7aec25f",
+      "Access-Control-Allow-Origin": "localhost:8000",
+      "Access-Control-Allow-Methods": "POST",
     },
     body: JSON.stringify({
-      name: name,
-      "email": email
-    })
+      name,
+      email
+    }),
   });
-} catch (err) {
-  console.log(err);
-}
-}
-
+  const data = await response.json();
+  console.log(data);
+};
 
 </script>
 
@@ -32,7 +33,7 @@ const submit = async () => {
     <div class="image">
       <img id="cuteblub"src="https://i.postimg.cc/5tS9yvRQ/pngwing-com.png" alt="cuteblub" />
     </div>
-    <form on:submit={submit}>
+    <form on:submit|preventDefault={submit}>
       <input type="text" placeholder="Name" bind:value={name}/>
       <input type="text" placeholder="Email" bind:value={email}/>
       <input type="submit" value="Subscribe" />
@@ -80,6 +81,7 @@ const submit = async () => {
     margin-left: 50%;
     margin-top: -150px;
   }
+
   
 </style>
 
