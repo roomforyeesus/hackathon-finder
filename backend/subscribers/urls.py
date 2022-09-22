@@ -5,3 +5,4 @@ from . import views
 urlpatterns = [
     path('',views.SubscriberView.as_view(), name='SubscriberView'),
 ]
+
