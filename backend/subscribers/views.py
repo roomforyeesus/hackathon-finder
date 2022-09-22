@@ -2,29 +2,23 @@ from tokenize import Token
 from django.shortcuts import render, HttpResponse
 from django.http import JsonResponse
 from .models import Subscriber
-from rest_framework.authentication import SessionAuthentication, BasicAuthentication, TokenAuthentication
-from rest_framework.permissions import IsAuthenticated
+import json
+# from rest_framework.authentication import SessionAuthentication, BasicAuthentication, TokenAuthentication
+# from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
 
 class SubscriberView(APIView):
-    authentication_classes = [SessionAuthentication, BasicAuthentication, TokenAuthentication]
-    permission_classes = [IsAuthenticated]
-
-    def get(self):
-        """get subscribers from db"""
-        subscribers = Subscriber.objects.all()
-        subscribers_list = []
-        for subscriber in subscribers:
-            subscribers_list.append({'email': subscriber.email, 'name': subscriber.name})
-        return Response(subscribers_list)
-
+    # authentication_classes = [SessionAuthentication, BasicAuthentication, TokenAuthentication]
+    # permission_classes = [IsAuthenticated]
+    print('hitting the post method')
     def post(self, request):
-        """add subscriber to db"""
-        email = request.data['email']
-        name = request.data['name']
-        Subscriber.objects.create(email=email)
-        Subscriber.objects.create(name=name)
-        return Response('ok')
-
+        print('hitting the post method')
+        data = json.loads(request.body)
+        print(data)
+        email = data['email']
+        name = data['name']
+        new_subscriber = Subscriber(email=email, name=name)
+        new_subscriber.save()
+        return JsonResponse('Email added', safe=False)

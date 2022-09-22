@@ -1,8 +1,8 @@
 from django.contrib import admin
 from django.urls import path, include
-from . import views
+from .views import SubscriberView
 
 urlpatterns = [
-    path('',views.SubscriberView.as_view(), name='SubscriberView'),
+    path('',SubscriberView.as_view(), name='SubscriberView'),
 ]
 
