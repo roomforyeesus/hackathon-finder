@@ -3,6 +3,5 @@ from django.urls import path, include
 from . import views
 
 urlpatterns = [
-    path('',views.index, name='index'),
-    path('post/', views.post_subscriber, name='post'),
+    path('',views.SubscriberView.as_view(), name='SubscriberView'),
 ]
