@@ -1,5 +1,29 @@
 <script lang="ts">
-import { addSubs } from './addSubs';
+let name: string;
+let email: string;
+import axios from 'axios';
+
+const submit = async () => {
+  try{
+  const response = await axios.post('http://127.0.0.1:8000/api/subscribers/', {
+    headers: {
+      'Content-Type' : 'application/json',
+      'Authorization': 'Token 7f127f946c99945b5859c97cf7782172d7aec25f',
+      'Allow-Control-Allow-Origin': '*',
+      'Allow-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+      'Allow-Control-Allow-Headers': 'Content-Type, Authorization, X-Requested-With'
+    },
+    body: JSON.stringify({
+      name: name,
+      "email": email
+    })
+  });
+} catch (err) {
+  console.log(err);
+}
+}
+
+
 </script>
 
 <main>
@@ -8,9 +32,9 @@ import { addSubs } from './addSubs';
     <div class="image">
       <img id="cuteblub"src="https://i.postimg.cc/5tS9yvRQ/pngwing-com.png" alt="cuteblub" />
     </div>
-    <form on:submit={addSubs} method="POST">
-      <input type="text" placeholder="Name" />
-      <input type="text" placeholder="Email" />
+    <form on:submit={submit}>
+      <input type="text" placeholder="Name" bind:value={name}/>
+      <input type="text" placeholder="Email" bind:value={email}/>
       <input type="submit" value="Subscribe" />
     </form>
   </div>
