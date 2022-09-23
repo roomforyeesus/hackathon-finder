@@ -1,14 +1,8 @@
-from django.http import JsonResponse
-import json 
-import requests
+import json
+from . import models
 
-url = "https://www.kontests.net/api/v1/all"
+URL = "https://www.kontests.net/api/v1/all"
 
-async def getContests(request):
-    print ("hitting the getContests method")
-    response = requests.get(url)
-    data = await json.loads(response.text)
-    print (data)
-        
-        
-getContests(url)
+def getContests(request):
+    contests = json.dumps(request.text(URL), indent=4)
+    print(contests)
