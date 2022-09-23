@@ -1,12 +1,19 @@
-import sys
+import os 
+from dotenv import load_dotenv
+from . models import Contest, Subscriber
+from . import hackathonData
 from trycourier import Courier
-from . models import Subscriber
+import requests
+
+load_dotenv()
+APIKEY = os.getenv('courierapikey')
 
 
+def sendEmail():
+    print('hitting the sendEmail method')
+    client = Courier(auth_token="APIKEY")
 
-client = Courier(auth_token=".env.courierapikey")
-
-resp = client.send_message(
+    resp = client.send_message(
   message={
     "to": {
       "email": Subscriber.email,
@@ -16,7 +23,6 @@ resp = client.send_message(
       "body": "Thanks for signing up, {{Subscriber.name}}!",
     },
     "data": {
-      "name": "Peter Parker",
     },
     "routing": {
       "method": "single",
@@ -25,4 +31,6 @@ resp = client.send_message(
   }
 )
 
-print(resp['messageId'])
+    print(resp['messageId'])
+
+
