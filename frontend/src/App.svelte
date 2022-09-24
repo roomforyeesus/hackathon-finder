@@ -79,12 +79,6 @@ const submit = async () => {
             </tr>
           {/each}
         {/if}
-  <footer>
-    <p>© 2022 Hackathon Finder</p>&nbsp;
-
-    <p>Created by <a href="https://github.com/roomforyeesus/hackathon-finder">roomforyeesus</a></p>
-    
-  </footer>
 </main>
 
 <style>
@@ -144,19 +138,11 @@ const submit = async () => {
   #cuteblub{
     margin-left: 50%;
     margin-top: -150px;
-    max-width: 320px;
+    max-width: 350px;
   }
   .bodywrap{
     display: flex;
     flex-direction: column;
-  }
-  footer{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: justify-self;
-    margin-top: 2rem;
-    color: aliceblue;
   }
 @media screen and (min-width: 800px) {
   .bodywrap{
