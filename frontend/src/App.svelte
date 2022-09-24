@@ -1,10 +1,21 @@
 <script lang="ts">
+import { onMount } from "svelte";
+let hackathons;
+
+onMount(async () => {
+  const response = await fetch(
+    "https://www.kontests.net/api/v1/all",{
+      method: "GET",
+    },
+  );
+  const dataz = await response.json();
+  hackathons = dataz;
+  
+})
+
+// submit function 
 let name;
 let email;
-let phoneNumber;
-
-
-
 
 const submit = async () => {
   try{
@@ -19,8 +30,7 @@ const submit = async () => {
       },
       body: JSON.stringify({
         name,
-        email,
-        phoneNumber: phoneNumber
+        email,   
       }),
     });
     const data = await response.json();
@@ -30,48 +40,100 @@ const submit = async () => {
   }
 };
 
+// hackathons.forEach(hackathon => {
+//   if (hackathon.status == 'YES'){
+//     hackathon.start = new Date(hackathon.start_time)
+//     hackathon.startt = hackathon.start.toLocaleString()
+//     hackathon.end = new Date(hackathon.end_time)
+//     hackathon.endt= hackathon.end.toLocaleString()
+//     hackathon.dur = Math.floor(hackathon.duration / 3600)
+//   }
+// });
+
 </script>
 
 <main>
   <div class="bodywrap">
-    <div class="textbub">Hiya! Leave your email and I will send you an weekly updates on hackathons happening around you!</div>
+    <div class="textbub">Hiya! Leave your email and I will alert you when a hackathon is within 24 Hours of it's start time!</div>
     <div class="image">
       <img id="cuteblub"src="https://i.postimg.cc/5tS9yvRQ/pngwing-com.png" alt="cuteblub" />
     </div>
     <form on:submit|preventDefault={submit}>
-      <input type="text" placeholder="Name" bind:value={name}/>
-      <input type="text" placeholder="Email" bind:value={email}/>
+      <input type="text" placeholder="Name" bind:value={name}/>&nbsp;
+      <input type="text" placeholder="Email" bind:value={email}/>&nbsp; 
       <!-- <input type="text" placeholder="Phone Number(Optional)" bind:value={phoneNumber}/> -->
       <input type="submit" value="Subscribe" />
     </form>
   </div>
-  <footer>
-    <p>© 2022 Hackathon Finder</p>
-  </footer>
+  <div class="table">
+    <h1>Current Hackathons</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Start Date</th>
+          <th>End Date</th>
+          <th>Duration</th>
+          <th>Link</th>
+        </tr>
+      </thead>
+      <tbody>
+        {#if hackathons}
+          {#each hackathons as hackathon}
+            <tr>
+              <td>{hackathon.name}</td>
+              <td>{hackathon.start_time}</td>
+              <td>{hackathon.end_time}</td>
+              <td>{hackathon.duration}</td>
+              <td><a href={hackathon.url}>Link</a></td>
+            </tr>
+          {/each}
+        {/if}
 </main>
 
 <style>
+  h1{
+    color: azure;
+    font-family: "American Typewriter", serif;
+  }
+  .table{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2rem;
+    color: azure;
+    max-width: 100%;
+    widows: auto;
+  }
+  form{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2rem;
+    width: auto;
+  }
   .textbub {
     display: inline-block;
     position: relative;
-    font-family: "Poppins", sans-serif;
+    font-family: "Noto Sans", sans-serif;
     font-size: 1.5rem;
-    font-weight: 500;
-    color: #000000;
-    margin: 0;
-    padding: 0;
-    margin-top: 1rem;
+    font-weight: 530;
+    color: #000000; 
+    margin-top: 0.5rem;
     margin-bottom: 2rem;
     margin-right: 50%;
     background-color: white;
-    border-radius: 15px;
+    border-radius: 18px;
     padding: 1rem;
+    width: auto;
   }
   .textbub::after{
     content: '';
 	  position: absolute;
 	  right: 0;
-	  top: 40%;
+	  top: 45%;
 	  width: 0;
 	  height: 0;
 	  border: 24px solid transparent;
@@ -82,12 +144,20 @@ const submit = async () => {
   	margin-right: -24px;
   }
   #cuteblub{
-    width: 50%;
-    height: 50%;
     margin-left: 50%;
     margin-top: -150px;
+    max-width: 350px;
   }
-
+  .bodywrap{
+    display: flex;
+    flex-direction: column;
+  }
+@media screen and (min-width: 800px) {
+  .bodywrap{
+    display: flex;
+    max-width: fit-content;
+  }
+}
   
 </style>
 

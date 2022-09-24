@@ -1,3 +1,4 @@
+from email import message
 import os 
 from dotenv import load_dotenv
 from . models import Contests, Subscribers
@@ -10,29 +11,19 @@ load_dotenv()
 APIKEY = os.getenv('courierapikey')
 TESTKEY = os.getenv('courierapikeytest')
 
-
-
-def sendEmail():
-    contests = Contests.objects.all()
-    contestNow = []
-    for contest in contests:
-        if contest.status == 'BEFORE':
-            contestNow = contest
-            break
-    subscribers = Subscribers.objects.all()
+def confEmail(data):
     client = Courier(auth_token=TESTKEY)
-    for subscriber in subscribers:
-              resp = client.send_message(
+    resp = client.send_message(
                 message={
                   "to": {
-                    "email": subscriber.email,
+                    "email": data['email'],
                   },
                   "content": {
                    "title": "Hackathon Alert",
-                   "body": "Hackathon " + contestNow.name + " is starting soon! Click the link to register: " + contestNow.url,
+                   "body": "Hi "+ data['name'] +"! You have successfully subscribed to Hackathon Alert. We will send you an email Monday to Wednesday when a hackathon starts in the next 24 hours.",
                   },
                   "data": {
-                    "name": subscriber.name,
+                    "name": data['name'],
                   },
                   "routing": {
                     "method": "single",
@@ -40,7 +31,33 @@ def sendEmail():
                   },
                 }
               )
-              print (resp)
-              print(resp['requestId'])
-            
-    print('emails sent to all subscribers')
+    print(resp['requestId'])
+    print('email sent to NEW subscriber')
+    
+def sendEmail():
+    client = Courier(auth_token=TESTKEY)
+    contests = Contests.objects.all()
+    subscribers = Subscribers.objects.all()
+    for contest in contests:
+        if contest.in_24_hours == 'YES' and contest.status == 'BEFORE':
+            for subscriber in subscribers:
+                resp = client.send_message(
+                    message={
+                      "to": {
+                        "email": subscriber.email,
+                      },
+                      "content": {
+                       "title": "Hackathon Alert",
+                       "body": "Hi "+ subscriber.name +"! A hackathon called "+ contest.name +" is starting in the next 24 hours. Check it out at "+ contest.url,
+                      },
+                      "data": {
+                        "name": subscriber.name,
+                      },
+                      "routing": {
+                        "method": "single",
+                        "channels": ["email"],
+                      },
+                    }
+                  )
+                print(resp['requestId'])
+                print('email sent to subscriber')
