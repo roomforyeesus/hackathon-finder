@@ -99,7 +99,8 @@ const submit = async () => {
     justify-content: center;
     margin-top: 2rem;
     color: azure;
-    width: 100%;
+    max-width: fit-content;
+    widows: auto;
   }
   form{
     display: flex;
@@ -107,6 +108,7 @@ const submit = async () => {
     align-items: center;
     justify-content: center;
     margin-top: 2rem;
+    width: auto;
   }
   .textbub {
     display: inline-block;
@@ -123,6 +125,7 @@ const submit = async () => {
     background-color: white;
     border-radius: 15px;
     padding: 1rem;
+    width: auto;
   }
   .textbub::after{
     content: '';
@@ -139,10 +142,9 @@ const submit = async () => {
   	margin-right: -24px;
   }
   #cuteblub{
-    width: 50%;
-    height: 50%;
     margin-left: 50%;
     margin-top: -150px;
+    max-width: 420px;
   }
   .bodywrap{
     display: flex;
@@ -152,11 +154,16 @@ const submit = async () => {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
+    justify-content: justify-self;
     margin-top: 2rem;
     color: aliceblue;
   }
-
+@media screen and (min-width: 800px) {
+  .bodywrap{
+    display: flex;
+    max-width: fit-content;
+  }
+}
   
 </style>
 
