@@ -6,23 +6,27 @@ let email;
 
 
 const submit = async () => {
-  const response = await fetch("http://localhost:8000/api/subscribers/", {
-    method: "POST",
-    mode: "no-cors",
-    credentials: 'include',
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": "Token " + "7f127f946c99945b5859c97cf7782172d7aec25f",
-      "Access-Control-Allow-Origin": "localhost:8000",
-      "Access-Control-Allow-Methods": "POST",
-    },
-    body: JSON.stringify({
-      name,
-      email
-    }),
-  });
-  const data = await response.json();
-  console.log(data);
+  try{
+    const response = await fetch("http://localhost:8000/api/subscribers/", {
+      method: "POST",
+      mode: "no-cors",
+      credentials: 'include',
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Token " + "7f127f946c99945b5859c97cf7782172d7aec25f",
+        "Access-Control-Allow-Origin": "localhost:8000",
+        "Access-Control-Allow-Methods": "POST",
+      },
+      body: JSON.stringify({
+        name,
+        email
+      }),
+    });
+    const data = await response.json();
+    console.log(data);
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 </script>
