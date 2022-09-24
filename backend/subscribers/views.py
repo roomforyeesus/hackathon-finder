@@ -15,10 +15,11 @@ class SubscriberView(APIView):
     def post(self, request):
         print('hitting the post method')
         data = json.loads(request.body)
-        # print(data)
+        print(data)
         email = data['email']
         name = data['name']
-        new_subscriber = Subscribers(email=email, name=name)
+        phone_number = data['phoneNumber']
+        new_subscriber = Subscribers(email=email, name=name, phone_number=phone_number)
         new_subscriber.save()
         print('new subscriber saved')
         timer()

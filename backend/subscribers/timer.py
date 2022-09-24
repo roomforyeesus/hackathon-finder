@@ -7,5 +7,5 @@ def timer():
     sendtime = "Monday" #time.strftime("%A")
     print (time)
     if sendtime == "Monday":
-        # getContests()
+        getContests()
         sendEmail()

@@ -13,7 +13,8 @@ def getContests():
             start_time=contest['start_time'],
             end_time=contest['end_time'],
             duration=contest['duration'],
-            in_24_hours=contest['in_24_hours']
+            in_24_hours=contest['in_24_hours'],
+            status=contest['status'],
         )
         
     return data
