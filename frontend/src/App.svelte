@@ -1,10 +1,20 @@
 <script lang="ts">
+import { onMount } from "svelte";
+let hackathons;
+
+onMount(async () => {
+  const response = await fetch(
+    "https://www.kontests.net/api/v1/all",{
+      method: "GET",
+    },
+  );
+  const dataz = await response.json();
+  hackathons = dataz;
+})
+// submit function 
 let name;
 let email;
 let phoneNumber;
-
-
-
 
 const submit = async () => {
   try{
@@ -34,29 +44,76 @@ const submit = async () => {
 
 <main>
   <div class="bodywrap">
-    <div class="textbub">Hiya! Leave your email and I will send you an weekly updates on hackathons happening around you!</div>
+    <div class="textbub">Hiya! Leave your email and I will send you an weekly hackathon to participate in or you can scroll down and check out a list of current hackathons going on now!</div>
     <div class="image">
       <img id="cuteblub"src="https://i.postimg.cc/5tS9yvRQ/pngwing-com.png" alt="cuteblub" />
     </div>
     <form on:submit|preventDefault={submit}>
-      <input type="text" placeholder="Name" bind:value={name}/>
-      <input type="text" placeholder="Email" bind:value={email}/>
+      <input type="text" placeholder="Name" bind:value={name}/>&nbsp;
+      <input type="text" placeholder="Email" bind:value={email}/>&nbsp;
       <!-- <input type="text" placeholder="Phone Number(Optional)" bind:value={phoneNumber}/> -->
       <input type="submit" value="Subscribe" />
     </form>
   </div>
+  <div class="table">
+    <h1>Current Hackathons</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Start Date</th>
+          <th>End Date</th>
+          <th>Duration</th>
+          <th>Link</th>
+        </tr>
+      </thead>
+      <tbody>
+        {#if hackathons}
+          {#each hackathons as hackathon}
+            <tr>
+              <td>{hackathon.name}</td>
+              <td>{hackathon.start_time}</td>
+              <td>{hackathon.end_time}</td>
+              <td>{hackathon.duration}</td>
+              <td><a href={hackathon.url}>Link</a></td>
+            </tr>
+          {/each}
+        {/if}
   <footer>
-    <p>© 2022 Hackathon Finder</p>
+    <p>© 2022 Hackathon Finder</p>&nbsp;
+
+    <p>Created by <a href="https://github.com/roomforyeesus/hackathon-finder">roomforyeesus</a></p>
+    
   </footer>
 </main>
 
 <style>
+  h1{
+    color: azure;
+    font-family: "Lucida Handwriting", sans-serif;
+  }
+  .table{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2rem;
+    color: azure;
+    width: 100%;
+  }
+  form{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2rem;
+  }
   .textbub {
     display: inline-block;
     position: relative;
     font-family: "Poppins", sans-serif;
     font-size: 1.5rem;
-    font-weight: 500;
+    font-weight: 540;
     color: #000000;
     margin: 0;
     padding: 0;
@@ -86,6 +143,18 @@ const submit = async () => {
     height: 50%;
     margin-left: 50%;
     margin-top: -150px;
+  }
+  .bodywrap{
+    display: flex;
+    flex-direction: column;
+  }
+  footer{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2rem;
+    color: aliceblue;
   }
 
   
