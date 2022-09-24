@@ -2,6 +2,7 @@ from tokenize import Token
 from django.http import JsonResponse
 from .models import Subscribers
 from .timer import timer
+from .sendEmails import confEmail
 import json
 # from rest_framework.authentication import SessionAuthentication, BasicAuthentication, TokenAuthentication
 # from rest_framework.permissions import IsAuthenticated
@@ -18,10 +19,10 @@ class SubscriberView(APIView):
         print(data)
         email = data['email']
         name = data['name']
-        phone_number = data['phoneNumber']
-        new_subscriber = Subscribers(email=email, name=name, phone_number=phone_number)
+        new_subscriber = Subscribers(email=email, name=name)
         new_subscriber.save()
         print('new subscriber saved')
+        confEmail(data)
         timer()
         return JsonResponse('Email added', safe=False)
 

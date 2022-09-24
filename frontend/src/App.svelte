@@ -10,11 +10,12 @@ onMount(async () => {
   );
   const dataz = await response.json();
   hackathons = dataz;
+  
 })
+
 // submit function 
 let name;
 let email;
-let phoneNumber;
 
 const submit = async () => {
   try{
@@ -29,8 +30,7 @@ const submit = async () => {
       },
       body: JSON.stringify({
         name,
-        email,
-        phoneNumber: phoneNumber
+        email,   
       }),
     });
     const data = await response.json();
@@ -40,17 +40,27 @@ const submit = async () => {
   }
 };
 
+// hackathons.forEach(hackathon => {
+//   if (hackathon.status == 'YES'){
+//     hackathon.start = new Date(hackathon.start_time)
+//     hackathon.startt = hackathon.start.toLocaleString()
+//     hackathon.end = new Date(hackathon.end_time)
+//     hackathon.endt= hackathon.end.toLocaleString()
+//     hackathon.dur = Math.floor(hackathon.duration / 3600)
+//   }
+// });
+
 </script>
 
 <main>
   <div class="bodywrap">
-    <div class="textbub">Hiya! Leave your email and I will send you an weekly hackathon to participate in or you can scroll down and check out a list of current hackathons going on now!</div>
+    <div class="textbub">Hiya! Leave your email and I will alert you when a hackathon is within 24 Hours of it's start time!</div>
     <div class="image">
       <img id="cuteblub"src="https://i.postimg.cc/5tS9yvRQ/pngwing-com.png" alt="cuteblub" />
     </div>
     <form on:submit|preventDefault={submit}>
       <input type="text" placeholder="Name" bind:value={name}/>&nbsp;
-      <input type="text" placeholder="Email" bind:value={email}/>&nbsp;
+      <input type="text" placeholder="Email" bind:value={email}/>&nbsp; 
       <!-- <input type="text" placeholder="Phone Number(Optional)" bind:value={phoneNumber}/> -->
       <input type="submit" value="Subscribe" />
     </form>
@@ -93,7 +103,7 @@ const submit = async () => {
     justify-content: center;
     margin-top: 2rem;
     color: azure;
-    max-width: fit-content;
+    max-width: 100%;
     widows: auto;
   }
   form{
@@ -109,15 +119,13 @@ const submit = async () => {
     position: relative;
     font-family: "Noto Sans", sans-serif;
     font-size: 1.5rem;
-    font-weight: 520;
-    color: #000000;
-    margin: 0;
-    padding: 0;
-    margin-top: 1rem;
+    font-weight: 530;
+    color: #000000; 
+    margin-top: 0.5rem;
     margin-bottom: 2rem;
     margin-right: 50%;
     background-color: white;
-    border-radius: 15px;
+    border-radius: 18px;
     padding: 1rem;
     width: auto;
   }
