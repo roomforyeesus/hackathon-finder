@@ -90,7 +90,7 @@ const submit = async () => {
 <style>
   h1{
     color: azure;
-    font-family: "Lucida Handwriting", sans-serif;
+    font-family: "American Typewriter", serif;
   }
   .table{
     display: flex;
@@ -113,9 +113,9 @@ const submit = async () => {
   .textbub {
     display: inline-block;
     position: relative;
-    font-family: "Poppins", sans-serif;
+    font-family: "Noto Sans", sans-serif;
     font-size: 1.5rem;
-    font-weight: 540;
+    font-weight: 520;
     color: #000000;
     margin: 0;
     padding: 0;
@@ -131,7 +131,7 @@ const submit = async () => {
     content: '';
 	  position: absolute;
 	  right: 0;
-	  top: 40%;
+	  top: 45%;
 	  width: 0;
 	  height: 0;
 	  border: 24px solid transparent;
@@ -144,7 +144,7 @@ const submit = async () => {
   #cuteblub{
     margin-left: 50%;
     margin-top: -150px;
-    max-width: 420px;
+    max-width: 320px;
   }
   .bodywrap{
     display: flex;
