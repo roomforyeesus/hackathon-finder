@@ -15,8 +15,7 @@ It was a challenge to make fetch request with a token authorization in django an
 headers incorrectly. I ultimately decided I will circle back to it if i actually have sensitivate data since it was taking a lot of precious time to
 troubleshoot and i started late.
 ## What I learned
-I learned a lot about svelte since it was my first time working with this framework but i already love it. I found the courier api to be pretty useful, and
-it can actually connect a wide variety of apis which is nice because it saves you from going in your application and replacing your keys, and it sort of give you an interface to do some things
-with the apis you connect.
+I learned a lot about svelte since it was my first time working with this framework but i already love it and the courier api is pretty useful, and
+it can actually connect a wide variety of apis which is nice because it saves you from going in your application and replacing your keys, and it sort of give you an interface to do some automations and things with the apis you connect.
 ## What's next for Hackathon Finder
 Honestly, I am not sure since it's my first hackathon but robably make the table display look better and add sorting if people actually use it
