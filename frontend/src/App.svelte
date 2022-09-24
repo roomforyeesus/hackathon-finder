@@ -1,6 +1,7 @@
 <script lang="ts">
 let name;
 let email;
+let phoneNumber;
 
 
 
@@ -13,13 +14,13 @@ const submit = async () => {
       credentials: 'include',
       headers: {
         "Content-Type": "application/json",
-        "Authorization": "Token " + "7f127f946c99945b5859c97cf7782172d7aec25f",
         "Access-Control-Allow-Origin": "localhost:8000",
         "Access-Control-Allow-Methods": "POST",
       },
       body: JSON.stringify({
         name,
-        email
+        email,
+        phoneNumber: phoneNumber
       }),
     });
     const data = await response.json();
@@ -33,13 +34,14 @@ const submit = async () => {
 
 <main>
   <div class="bodywrap">
-    <div class="textbub">Hiya! Leave your email and I will send you an weekly updates on what hackathons are happening around you!</div>
+    <div class="textbub">Hiya! Leave your email and I will send you an weekly updates on hackathons happening around you!</div>
     <div class="image">
       <img id="cuteblub"src="https://i.postimg.cc/5tS9yvRQ/pngwing-com.png" alt="cuteblub" />
     </div>
     <form on:submit|preventDefault={submit}>
       <input type="text" placeholder="Name" bind:value={name}/>
       <input type="text" placeholder="Email" bind:value={email}/>
+      <!-- <input type="text" placeholder="Phone Number(Optional)" bind:value={phoneNumber}/> -->
       <input type="submit" value="Subscribe" />
     </form>
   </div>
@@ -69,7 +71,7 @@ const submit = async () => {
     content: '';
 	  position: absolute;
 	  right: 0;
-	  top: 50%;
+	  top: 40%;
 	  width: 0;
 	  height: 0;
 	  border: 24px solid transparent;

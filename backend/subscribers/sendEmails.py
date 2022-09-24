@@ -13,29 +13,34 @@ TESTKEY = os.getenv('courierapikeytest')
 
 
 def sendEmail():
-    print('hitting the sendEmail method')
-    subs = Subscribers.objects.all()
-    contest = Contests.objects.all()
-    client = Courier(auth_token=APIKEY)
-    resp = client.send_message(
-  message={
-    "to": {
-      "email": "{{subs.email}}",
-    },
-    "content": {
-      "title": "Welcome!",
-      "body": "Thanks for signing up, {{subs.name}}! here's some hackathons you might be interested in: {{contest.name}},{{contest.url}}.{{contest.in_24_hours}} Good luck!",
-    },
-    "data": {
-      "name": "{{subs.name}}",
-    },
-    "routing": {
-      "method": "single",
-      "channels": ["email"],
-    },
-  }
-)
-
-    print(resp['requestId'])
-
-print('emails sent')
+    contests = Contests.objects.all()
+    contestNow = []
+    for contest in contests:
+        if contest.status == 'BEFORE':
+            contestNow = contest
+            break
+    subscribers = Subscribers.objects.all()
+    client = Courier(auth_token=TESTKEY)
+    for subscriber in subscribers:
+              resp = client.send_message(
+                message={
+                  "to": {
+                    "email": subscriber.email,
+                  },
+                  "content": {
+                   "title": "Hackathon Alert",
+                   "body": "Hackathon " + contestNow.name + " is starting soon! Click the link to register: " + contestNow.url,
+                  },
+                  "data": {
+                    "name": subscriber.name,
+                  },
+                  "routing": {
+                    "method": "single",
+                    "channels": ["email"],
+                  },
+                }
+              )
+              print (resp)
+              print(resp['requestId'])
+            
+    print('emails sent to all subscribers')

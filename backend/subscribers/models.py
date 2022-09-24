@@ -12,6 +12,7 @@ class Subscribers(models.Model):
     """
     email = models.EmailField()
     name = models.CharField(max_length=128)
+    phone_number = models.CharField(max_length=128, default='0000000000')
     def __str__(self):
         return self.name + ' ' + self.email
     class Meta:
@@ -27,6 +28,7 @@ class Contests(models.Model):
     duration = models.CharField(max_length=128)
     description = models.CharField(max_length=128)
     in_24_hours = models.CharField(max_length=128)
+    status = models.CharField(max_length=128, default='CODING')
     
     def __str__(self):
         return self.name + ' ' + self.url
