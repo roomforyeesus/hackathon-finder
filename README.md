@@ -4,7 +4,7 @@
 When I was looking for my first hackathon to participate in, I also found an API called Kontest, and they have up to date hackathon information. 
 So I thought how perfect! I will build a hackathon-finder for my first hackathon.
 ## What it does
- It displays all the current hackathons and if they have started or not and if you leave your email you'll get an email notification every other day for any hackathons beginning in the next 24 hour!
+ It displays all the current hackathons plus if they have started or not and if you leave your email you'll get an email notification and/or text every other day for any hackathons beginning in the next 24 hour!
 ## How I built it
 This was built ultilizing Svelte as the frontend, and Django as the backend. I used Django as an rest api, and orm to save user data to database.
 I used python to automate the confirmation emails, emailing the subscriber list every other day if there are any hackathons that match the criterias.
