@@ -70,7 +70,7 @@ const submit = async () => {
     <form on:submit|preventDefault={submit}>
       <input type="text" placeholder="Name" bind:value={name}/>&nbsp;
       <input type="text" placeholder="Email" bind:value={email}/>&nbsp; 
-      <input type="text" placeholder="Phone Number(Optional)" bind:value={phone_number}/>
+      <input type="text" placeholder="Phone Number(Optional)" bind:value={phone_number}/>&nbsp;
       <input type="submit" value="Subscribe" />
     </form>
   </div>
@@ -111,7 +111,7 @@ const submit = async () => {
   }
   #hiya{
     color:black;
-    font-family: "Snell Roundhan", cursive;
+    font-family: "Gil Sans", sans-serif;
     font-size: 1.6rem;
     padding-bottom: 0.4rem;
   }
