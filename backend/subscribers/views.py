@@ -1,6 +1,6 @@
 from tokenize import Token
 from django.http import JsonResponse
-from .models import Subscribers
+from .models import Subscribers, Contests
 from .timer import timer
 from .sendEmails import confEmail
 import json
@@ -19,10 +19,16 @@ class SubscriberView(APIView):
         print(data)
         email = data['email']
         name = data['name']
-        new_subscriber = Subscribers(email=email, name=name)
+        phone_number = data['phone_number']
+        new_subscriber = Subscribers(email=email, name=name, phone_number=phone_number)
         new_subscriber.save()
         print('new subscriber saved')
         confEmail(data)
         timer()
         return JsonResponse('Email added', safe=False)
-
+    
+    # def getHackathons(self, request):
+    #     print('hitting the get method')
+    #     contests = Contests.objects.all()
+    #     print(contests)
+    #     return JsonResponse('Hackathons', safe=False)

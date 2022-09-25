@@ -9,6 +9,13 @@ onMount(async () => {
     },
   );
   const dataz = await response.json();
+  // if (dataz.name != 'bad name'){
+  //   dataz.start = new Date(dataz.start_time)
+  //   dataz.start_time = dataz.start.toLocaleString('en-US')
+  //   dataz.end = new Date(dataz.end_time)
+  //   dataz.end_time= dataz.end.toLocaleString('en-US')
+  //   dataz.duration = Math.floor(dataz.duration / 3600000)
+  // }
   hackathons = dataz;
   
 })
@@ -16,6 +23,7 @@ onMount(async () => {
 // submit function 
 let name;
 let email;
+let phone_number;
 
 const submit = async () => {
   try{
@@ -30,7 +38,8 @@ const submit = async () => {
       },
       body: JSON.stringify({
         name,
-        email,   
+        email,
+        phone_number, 
       }),
     });
     const data = await response.json();
@@ -41,7 +50,7 @@ const submit = async () => {
 };
 
 // hackathons.forEach(hackathon => {
-//   if (hackathon.status == 'YES'){
+//   if (hackathon.status !== 'null'){
 //     hackathon.start = new Date(hackathon.start_time)
 //     hackathon.startt = hackathon.start.toLocaleString()
 //     hackathon.end = new Date(hackathon.end_time)
@@ -54,14 +63,14 @@ const submit = async () => {
 
 <main>
   <div class="bodywrap">
-    <div class="textbub">Hiya! Leave your email and I will alert you when a hackathon is within 24 Hours of it's start time!</div>
+    <div class="textbub"><div id="hiya">Hiya! </div> Leave your email and I will alert you when a hackathon is within 24 Hours of it's start time!</div>
     <div class="image">
       <img id="cuteblub"src="https://i.postimg.cc/5tS9yvRQ/pngwing-com.png" alt="cuteblub" />
     </div>
     <form on:submit|preventDefault={submit}>
       <input type="text" placeholder="Name" bind:value={name}/>&nbsp;
       <input type="text" placeholder="Email" bind:value={email}/>&nbsp; 
-      <!-- <input type="text" placeholder="Phone Number(Optional)" bind:value={phoneNumber}/> -->
+      <input type="text" placeholder="Phone Number(Optional)" bind:value={phone_number}/>
       <input type="submit" value="Subscribe" />
     </form>
   </div>
@@ -71,9 +80,11 @@ const submit = async () => {
       <thead>
         <tr>
           <th>Name</th>
-          <th>Start Date</th>
+          <!-- <th>Start Date</th>
           <th>End Date</th>
-          <th>Duration</th>
+          <th>Duration</th> -->
+          <th>In 24 Hours</th>
+          <th>Status</th>
           <th>Link</th>
         </tr>
       </thead>
@@ -82,9 +93,11 @@ const submit = async () => {
           {#each hackathons as hackathon}
             <tr>
               <td>{hackathon.name}</td>
-              <td>{hackathon.start_time}</td>
+              <!-- <td>{hackathon.start_time}</td>
               <td>{hackathon.end_time}</td>
-              <td>{hackathon.duration}</td>
+              <td>{hackathon.duration}</td> -->
+              <td>{hackathon.in_24_hours}</td>
+              <td>{hackathon.status}</td>
               <td><a href={hackathon.url}>Link</a></td>
             </tr>
           {/each}
@@ -95,6 +108,12 @@ const submit = async () => {
   h1{
     color: azure;
     font-family: "American Typewriter", serif;
+  }
+  #hiya{
+    color:black;
+    font-family: "Snell Roundhan", cursive;
+    font-size: 1.6rem;
+    padding-bottom: 0.4rem;
   }
   .table{
     display: flex;
@@ -113,6 +132,7 @@ const submit = async () => {
     justify-content: center;
     margin-top: 2rem;
     width: auto;
+    color-scheme: light;
   }
   .textbub {
     display: inline-block;
