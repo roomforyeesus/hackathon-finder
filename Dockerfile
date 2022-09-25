@@ -11,7 +11,6 @@ RUN apt-get update && apt-get install -y \
     python3-wheel \
     git \
     && rm -rf /var/lib/apt/lists/*
-RUN npm install -g npm@latest
 RUN apt-get install -y nodejs npm && npm install -g npm@latest docker docker-compose
 RUN pip3 install --upgrade pip
 RUN pip3 install --upgrade setuptools
