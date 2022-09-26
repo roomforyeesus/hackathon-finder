@@ -9,7 +9,7 @@ def timer():
     if sendtime == "Monday" or sendtime == "Saturday" or sendtime == "Wednesday":
         sendEmail()
         count = 0
-        if count <=3:
+        if count <3:
             count += 1
         else:
             getContests()
