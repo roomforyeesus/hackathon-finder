@@ -1,14 +1,14 @@
 # hackathon-finder
 
-##**If you want to run this project**
-**note** you need docker + docker compose downloaded for this
-`git clone <this url>`
-`cd hackathon-finder`
-`docker-compose build`
-`docker-compose up`
-navigate to http://127.0.0.1
-**this is to remove your containers**
-`docker-compose down`
+##**If you want to run this project** <br>
+**note** you need docker + docker compose downloaded for this<br><br>
+`git clone <this url>`<br>
+`cd hackathon-finder`<br>
+`docker-compose build`<br>
+`docker-compose up`<br>
+navigate to http://127.0.0.1<br><br>
+**this is to remove your containers**<br><br>
+`docker-compose down`<br><br><br>
 
 
 ## Inspiration
