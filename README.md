@@ -1,5 +1,16 @@
 # hackathon-finder
 
+##**If you want to run this project**
+**note** you need docker + docker compose downloaded for this
+`git clone <this url>`
+`cd hackathon-finder`
+`docker-compose build`
+`docker-compose up`
+navigate to http://127.0.0.1
+**this is to remove your containers**
+`docker-compose down`
+
+
 ## Inspiration
 When I was looking for my first hackathon to participate in, I also found an API called Kontest, and they have up to date hackathon information. 
 So I thought how perfect! I will build a hackathon-finder for my first hackathon.
